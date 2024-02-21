@@ -9,6 +9,14 @@
 (* 2e: Throws an exception because the right side of the andalso is evaluated even though the left side is true *)
 (* 8 mod 3 = 8 div 3 andalso 4 div 0 = 4; *)
 
+(* Websites: 
+    smlfamily.github.io
+    https://stackoverflow.com/questions/7946853/sml-in-list-parameter-functions
+    https://stackoverflow.com/questions/8555342/sml-get-element-from-the-list
+    https://stackoverflow.com/questions/13359416/how-can-i-remove-subscript-out-of-bound-error
+    https://stackoverflow.com/questions/49685124/convert-string-to-uppercase -- for use of Char.toUpper and for the x::xs pattern for strings
+    https://stackoverflow.com/questions/52234652/char-tostring-without-special-handling-of-and
+*)
 
 (* 3 *)
 if 8 mod 3 = 8 div 3 
@@ -52,27 +60,59 @@ fun gcd(x, y) =
     else
         gcd(y, x mod y);
 
+gcd(12, 8);
+gcd(8, 12);
+gcd(12, 0);
+
 (* 11 *)
 fun allCaps(s) =
-    if String.size(s) = 1 then 
+    if String.size(s) = 0 then 
+        ""
+    else if String.size(s) = 1 then 
         Char.toString(Char.toUpper(String.sub(s,0)))
     else 
-        if Char.isAlpha(String.sub(s,0))
-        then
-            Char.toString(Char.toUpper(String.sub(s,0)))^allCaps(String.substring(s,1,String.size(s)-1))
-        else
-            Char.toString(String.sub(s,0))^allCaps(String.substring(s,1,String.size(s)-1));
+        Char.toString(Char.toUpper(String.sub(s,0)))^allCaps(String.substring(s,1,String.size(s)-1));
+
+allCaps("hello");
+allCaps("hello world");
+allCaps("hello world!");
+allCaps("1hello world!1");
+allCaps("1");
+allCaps("");
 
 (* 12 *)
 fun firstCaps([]) = []
-    | firstCaps(s::ss) = Char.toString(Char.toUpper(String.sub(s,0)))^String.substring(s,1,String.size(s)-1)::firstCaps(ss);
+    | firstCaps(s::ss) = 
+    if String.size(s) > 0 then 
+        Char.toString(Char.toUpper(String.sub(s,0)))^String.substring(s,1,String.size(s)-1)::firstCaps(ss)
+    else
+        ""::firstCaps(ss);
+
+firstCaps(["testing", "first", "caps", "method", "fully"]);
+firstCaps(["testing", "first", "caps", "method", "fully", "1"]);
+firstCaps(["hello"]);
+firstCaps(["1"]);
+firstCaps([""]);
 
 (* 13 *)
 fun swap([]) = []
     | swap([x]) = [x]
     | swap(x::y::xs) = y::x::swap(xs);
 
+swap([1,2,3,4,5]);
+swap([1]);
+swap([1,2]);
+swap([]);
+
 (* 14 *)
 fun rotate(n, []) = []
     | rotate(0, x::xs) = x::xs
     | rotate(n, x::xs) = rotate(n-1, xs@[x]);
+
+rotate(3, [1,2,3,4,5]);
+rotate(0, [1,2,3,4,5]);
+rotate(5, [1,2,3,4,5]);
+rotate(6, [1,2,3,4,5]);
+rotate(0, []);
+rotate(1, []);
+rotate(0, [1]);
