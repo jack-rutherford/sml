@@ -73,3 +73,6 @@ fun swap([]) = []
     | swap(x::y::xs) = y::x::swap(xs);
 
 (* 14 *)
+fun rotate(n, []) = []
+    | rotate(0, x::xs) = x::xs
+    | rotate(n, x::xs) = rotate(n-1, xs@[x]);
