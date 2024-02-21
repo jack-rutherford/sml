@@ -45,3 +45,31 @@ Char.ord(#"a");
 Char.chr(97);
 
 (* 10 *)
+fun gcd(x, y) =
+    if y = 0
+    then 
+        x
+    else
+        gcd(y, x mod y);
+
+(* 11 *)
+fun allCaps(s) =
+    if String.size(s) = 1 then 
+        Char.toString(Char.toUpper(String.sub(s,0)))
+    else 
+        if Char.isAlpha(String.sub(s,0))
+        then
+            Char.toString(Char.toUpper(String.sub(s,0)))^allCaps(String.substring(s,1,String.size(s)-1))
+        else
+            Char.toString(String.sub(s,0))^allCaps(String.substring(s,1,String.size(s)-1));
+
+(* 12 *)
+fun firstCaps([]) = []
+    | firstCaps(s::ss) = Char.toString(Char.toUpper(String.sub(s,0)))^String.substring(s,1,String.size(s)-1)::firstCaps(ss);
+
+(* 13 *)
+fun swap([]) = []
+    | swap([x]) = [x]
+    | swap(x::y::xs) = y::x::swap(xs);
+
+(* 14 *)
