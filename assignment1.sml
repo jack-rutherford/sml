@@ -16,6 +16,7 @@
     https://stackoverflow.com/questions/13359416/how-can-i-remove-subscript-out-of-bound-error
     https://stackoverflow.com/questions/49685124/convert-string-to-uppercase -- for use of Char.toUpper and for the x::xs pattern for strings
     https://stackoverflow.com/questions/52234652/char-tostring-without-special-handling-of-and
+    https://piazza.com/class_profile/get_resource/hpo8fqgcnhr585/htsrltcqhh7ez
 *)
 
 (* 3 *)
