@@ -83,7 +83,7 @@ allCaps("");
 
 (* 12 *)
 fun firstCaps([]) = []
-    | firstCaps(s::ss) = 
+    | firstCaps(s`::ss) = 
     if String.size(s) > 0 then 
         Char.toString(Char.toUpper(String.sub(s,0)))^String.substring(s,1,String.size(s)-1)::firstCaps(ss)
     else
