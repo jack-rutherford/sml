@@ -5,6 +5,7 @@
     https://stackoverflow.com/questions/20555881/sml-map-function
     https://stackoverflow.com/questions/14603623/sml-case-and-pattern-matching
     https://stackoverflow.com/questions/24980801/what-are-the-options-some-and-none-in-sml
+    https://cs.wellesley.edu/~cs251/s19/slides/sml-lists_4up.pdf
 *)
 
 (* 15 *)
@@ -121,10 +122,47 @@ convert(three);
 convert(two);
 
 (* 28 *)
+fun add(x,y) = 
+    let
+        fun add2(O, y) = y
+            | add2(succ(x), y) = succ(add2(x, y))
+    in
+        add2(x, y)
+    end;
+
+convert(add(three, two));
+convert(add(two, two));
+convert(add(one, two));
+convert(add(zero, two));
+convert(add(zero, zero));
 
 
 (* 29 *)
+fun mul(x,y) = 
+    let
+        fun mul2(O, y) = O
+            | mul2(succ(x), y) = add(y, mul2(x, y))
+    in
+        mul2(x, y)
+    end;
 
+convert(mul(three, two));
+convert(mul(two, two));
+convert(mul(one, two));
+convert(mul(three, zero));
+convert(mul(zero, two));
+convert(mul(zero, zero));
 
 (* 30 *)
+fun hadd lst = 
+    let
+        fun add2(x, y) = add(x, y)
+    in
+        foldr add2 O lst
+    end;
+
+convert(hadd [zero, one, two, three]);
+convert(hadd [zero, one, two, two]);
+convert(hadd [zero, one, two, zero]);
+convert(hadd [zero, zero, zero, zero]);
 
