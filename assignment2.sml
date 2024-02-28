@@ -36,10 +36,25 @@ fun delete5(s) =
     delete2 5 s;
 
 (* 22 *)
+fun remove bfun nil = nil
+    | remove bfun (h::t) = 
+        if bfun h then 
+            h::remove bfun t
+        else 
+            remove bfun t;
+
+fun lowCas(s) = 
+    if Char.isLower(String.sub(s, 0)) then
+        true
+    else
+        false;
+
 (* map(fn lst => lowCas(lst)) ["Hello", "hi", "john", "Nicholas"]; *)
-filter(fn s => Char.isLower(String.sub(s, 0))) ["Hello", "hi", "john", "Nicholas"];
-filter(fn s => Char.isLower(String.sub(s, 0))) ["hello", "hi", "john", "nicholas"];
-filter(fn s => Char.isLower(String.sub(s, 0))) ["TESTING", "HEllO", "World"];
+remove lowCas ["Hello", "hi", "john", "Nicholas"];
+remove lowCas ["hello", "hi", "john", "nicholas"];
+remove lowCas ["TESTING", "HEllO", "World"];
+(* remove lowCas [""]; *)
+(* remove lowCas []; *)
 
 (* 23 *)
 fun allCaps(s) =
@@ -52,7 +67,7 @@ fun allCaps(s) =
 
 map(fn s => allCaps(s))["Hello", "hi", "john", "Nicholas"];
 map(fn s => allCaps(s))[""];
-map(fn s => allCaps(s))[];
+(* map(fn s => allCaps(s))[]; *)
 
 (* 24 *)
 fun find(s, file) = 
@@ -74,7 +89,21 @@ find("map", "assignment2.sml");
 find("pam", "assignment2.sml");
 
 (* 25 *)
+fun transform f [] = []
+    | transform f (x::xs) = 
+    let val res = (f x) handle _ => x
+    in
+        res::transform f xs
+    end;
 
+fun posSquare x = if x < 0 then raise Fail "Negative Number" else x*x;
+
+(* transform (fn x => x*x) [1,2,3,4,5,6,7];
+transform (fn x => x*x) [2, 3.0, 4, 6];
+transform (fn x => x*x) []; *)
+transform posSquare [1,2,3,4,5,6,7];
+transform posSquare [2, 3, ~4, 4, 6];
+transform posSquare [];
 
 (* 26 *)
 datatype Natural = O | succ of Natural;
@@ -88,6 +117,8 @@ val three = succ(two);
 fun convert(O) = 0
     | convert(succ(x)) = 1 + convert(x);
 
+convert(three);
+convert(two);
 
 (* 28 *)
 
